@@ -144,8 +144,9 @@
         }
         
         .character-card:hover {
-            transform: translateY(-20px) scale(1.05);
-            box-shadow: 0 30px 60px rgba(255, 154, 158, 0.25);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            border: 3px solid #ff9a9e;
         }
         
         .character-image-container {
@@ -194,6 +195,32 @@
             position: relative;
             z-index: 1;
             line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .character-card-hint {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: white;
+            border-radius: 25px;
+            font-size: 0.95em;
+            font-weight: 500;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .character-card-hint::before {
+            content: '👆';
+            font-size: 1.1em;
+        }
+
+        .character-card:hover .character-card-hint {
+            transform: scale(1.05);
         }
         
         /* ABOUT - 问答区 */
@@ -510,8 +537,9 @@
                 <h3 class="character-name">吉伊卡哇</h3>
                 <p class="character-name-en">Chiikawa</p>
                 <p class="character-tagline">主角·小仓鼠·勇敢坚强</p>
+                <div class="character-card-hint">点击查看详情</div>
             </div>
-            
+
             <div class="character-card" onclick="openCharacterModal('hachiware')">
                 <div class="character-image-container">
                     <img src="public/images/chiikawa/hachiware.png" alt="Hachiware" class="character-image">
@@ -519,8 +547,9 @@
                 <h3 class="character-name">小八</h3>
                 <p class="character-name-en">Hachiware</p>
                 <p class="character-tagline">猫咪·开朗热情·爱说话</p>
+                <div class="character-card-hint">点击查看详情</div>
             </div>
-            
+
             <div class="character-card" onclick="openCharacterModal('usagi')">
                 <div class="character-image-container">
                     <img src="public/images/chiikawa/usagi.png" alt="Usagi" class="character-image">
@@ -528,8 +557,9 @@
                 <h3 class="character-name">乌萨奇</h3>
                 <p class="character-name-en">Usagi</p>
                 <p class="character-tagline">兔子·自由奔放·神秘强大</p>
+                <div class="character-card-hint">点击查看详情</div>
             </div>
-            
+
             <div class="character-card" onclick="openCharacterModal('kurimanju')">
                 <div class="character-image-container">
                     <img src="public/images/chiikawa/kurimanju.png" alt="Kurimanju" class="character-image">
@@ -537,6 +567,7 @@
                 <h3 class="character-name">栗子馒头</h3>
                 <p class="character-name-en">Kurimanju</p>
                 <p class="character-tagline">蜜獾·成熟稳重·爱喝酒</p>
+                <div class="character-card-hint">点击查看详情</div>
             </div>
         </div>
     </section>
