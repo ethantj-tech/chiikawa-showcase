@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiikawa角色图鉴</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            color: #666;
+        }
+        
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+        
+        .character-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .character-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .character-card-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .character-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            flex-shrink: 0;
+        }
+        
+        .character-name {
+            flex: 1;
+        }
+        
+        .character-name h2 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .character-name .english-name {
+            color: #999;
+            font-size: 0.9em;
+        }
+        
+        .character-description {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .character-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background: #f5f5f5;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            padding: 5px 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85em;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 1000;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #f5f5f5;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            background: #e0e0e0;
+        }
+        
+        .modal-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .modal-section {
+            margin-bottom: 25px;
+        }
+        
+        .modal-section h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .modal-section p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .info-item {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .info-item label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .info-item span {
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .character-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🐹 Chiikawa角色图鉴</h1>
+            <p>探索吉伊卡哇和他的朋友们</p>
+        </header>
+        
+        <div class="character-grid" id="characterGrid">
+            <!-- 角色卡片将通过JavaScript动态生成 -->
+        </div>
+    </div>
+    
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <img src="" alt="" class="modal-image" id="modalImage">
+            <div class="modal-section">
+                <h2 id="modalName"></h2>
+                <p class="english-name" id="modalEnglishName"></p>
+            </div>
+            <div class="modal-section">
+                <h3>角色描述</h3>
+                <p id="modalDescription"></p>
+            </div>
+            <div class="modal-section">
+                <h3>性格特点</h3>
+                <div class="tags" id="modalPersonality"></div>
+            </div>
+            <div class="modal-section">
+                <h3>角色信息</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>物种</label>
+                        <span id="modalSpecies"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>生日</label>
+                        <span id="modalBirthday"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>武器</label>
+                        <span id="modalWeapon"></span>
+                    </div>
+                    <div class="info-item">
+                        <label>喜欢的食物</label>
+                        <span id="modalFavoriteFoods"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const characters = [
+            {
+                id: 1,
+                name: "吉伊卡哇",
+                nameEn: "Chiikawa",
+                description: "本作主角，一只白色的小仓鼠。虽然爱哭但在关键时刻非常勇敢坚强，运气很好，住在抽奖中的白色房子里。非常喜欢自己的好朋友哈奇和乌萨奇。台词基本上由简单的音节构成。",
+                personality: ["爱哭", "勇敢", "善良", "运气好"],
+                appearance: "白色小仓鼠，圆滚滚的身体，大大的眼睛，可爱的表情",
+                favoriteFoods: ["蛋糕", "团子", "哈奇做的饭"],
+                color: "#FFFFFF",
+                emoji: "🐹",
+                birthday: "2017年5月1日",
+                weapon: "粉色刺叉",
+                species: "仓鼠",
+                image: null
+            },
+            {
+                id: 2,
+                name: "哈奇",
+                nameEn: "Hachiware",
+                description: "主角团之一，吉伊和乌萨奇的好朋友。主角团中唯一能完整使用人类语言说话的存在。好奇心旺盛的乐天派，偶尔会露出天然的一面，住在山洞里。是吉伊的现实嘴替。",
+                personality: ["乐观开朗", "外向", "聪明", "可靠"],
+                appearance: "蓝紫色的猫咪形象（作者说不是猫），圆脸，蓝色头发",
+                favoriteFoods: ["咖啡", "料理", "美食"],
+                color: "#87CEEB",
+                emoji: "🐱",
+                birthday: "2020年5月1日",
+                weapon: "蓝色刺叉",
+                species: "未知（像猫但不是猫）",
+                image: null
+            },
+            {
+                id: 3,
+                name: "乌萨奇",
+                nameEn: "Usagi",
+                description: "主角团之一，吉伊和哈奇的好朋友。是一只黄色毛发的兔子，尾巴是白色大绒球。台词常为'呀哈''呜啦'等怪声。直觉敏锐，自由奔放又神秘的存在。住所至今是谜。",
+                personality: ["自由奔放", "神秘", "敏锐", "搞怪"],
+                appearance: "黄色毛发，长耳朵，白色大绒球尾巴，搞笑的表情",
+                favoriteFoods: ["三叶草", "好吃的"],
+                color: "#FFE135",
+                emoji: "🐰",
+                birthday: "2019年1月22日",
+                weapon: "能发射火药的棍子",
+                species: "兔子",
+                image: null
+            },
+            {
+                id: 4,
+                name: "栗子馒头",
+                nameEn: "Kurimanju",
+                description: "一只棕色的小动物（原型是蜜獾）。看起来很可爱，但声音和行为像一位老成的大叔，几乎台词只有'哈——'。每次出场都会像位美食家一样享受餐食，对主角团也关照有佳。",
+                personality: ["成熟稳重", "美食家", "和善", "可靠"],
+                appearance: "棕色圆滚滚的身体，蜜獾形象，看起来很可爱",
+                favoriteFoods: ["各种美食", "好吃的料理"],
+                color: "#8B4513",
+                emoji: "🍘",
+                birthday: "未知",
+                weapon: "无",
+                species: "蜜獾",
+                image: null
+            }
+        ];
+        
+        function renderCharacters() {
+            const grid = document.getElementById('characterGrid');
+            grid.innerHTML = characters.map(char => `
+                <div class="character-card" onclick="openModal(${char.id})">
+                    <div class="character-card-header">
+                        <div class="character-avatar" style="background: ${char.color}">
+                            ${char.emoji}
+                        </div>
+                        <div class="character-name">
+                            <h2>${char.name}</h2>
+                            <p class="english-name">${char.nameEn}</p>
+                        </div>
+                    </div>
+                    <p class="character-description">${char.description}</p>
+                    <div class="tags">
+                        ${char.personality.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function openModal(id) {
+            const char = characters.find(c => c.id === id);
+            if (!char) return;
+            
+            document.getElementById('modalName').textContent = char.name;
+            document.getElementById('modalEnglishName').textContent = char.nameEn;
+            document.getElementById('modalDescription').textContent = char.description;
+            document.getElementById('modalImage').style.display = 'none';
+            document.getElementById('modalPersonality').innerHTML = char.personality.map(tag => `<span class="tag">${tag}</span>`).join('');
+            document.getElementById('modalSpecies').textContent = char.species;
+            document.getElementById('modalBirthday').textContent = char.birthday;
+            document.getElementById('modalWeapon').textContent = char.weapon;
+            document.getElementById('modalFavoriteFoods').textContent = char.favoriteFoods.join(', ');
+            
+            document.getElementById('modal').classList.add('active');
+        }
+        
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+        
+        // 点击模态框外部关闭
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+        
+        // 键盘ESC关闭
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+        
+        renderCharacters();
+    </script>
+</body>
+</html>
