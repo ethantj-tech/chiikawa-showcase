@@ -114,7 +114,7 @@
         /* 角色展示区 */
         .characters-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 40px;
             margin-top: 60px;
         }
@@ -487,16 +487,16 @@
                 </div>
                 <h3 class="character-name">吉伊卡哇</h3>
                 <p class="character-name-en">Chiikawa</p>
-                <p class="character-tagline">虽然爱哭，但非常勇敢坚强</p>
+                <p class="character-tagline">主角·小仓鼠·勇敢坚强</p>
             </div>
             
             <div class="character-card" onclick="openCharacterModal('hachiware')">
                 <div class="character-image-container">
                     <img src="public/images/chiikawa/hachiware.png" alt="Hachiware" class="character-image">
                 </div>
-                <h3 class="character-name">哈奇</h3>
+                <h3 class="character-name">小八</h3>
                 <p class="character-name-en">Hachiware</p>
-                <p class="character-tagline">唯一能完整说话的好朋友</p>
+                <p class="character-tagline">猫咪·开朗热情·爱说话</p>
             </div>
             
             <div class="character-card" onclick="openCharacterModal('usagi')">
@@ -505,7 +505,34 @@
                 </div>
                 <h3 class="character-name">乌萨奇</h3>
                 <p class="character-name-en">Usagi</p>
-                <p class="character-tagline">自由奔放又神秘的存在</p>
+                <p class="character-tagline">兔子·自由奔放·神秘强大</p>
+            </div>
+            
+            <div class="character-card" onclick="openCharacterModal('kurimanju')">
+                <div class="character-image-container">
+                    <img src="public/images/chiikawa/kurimanju.png" alt="Kurimanju" class="character-image">
+                </div>
+                <h3 class="character-name">栗子馒头</h3>
+                <p class="character-name-en">Kurimanju</p>
+                <p class="character-tagline">蜜獾·成熟稳重·爱喝酒</p>
+            </div>
+            
+            <div class="character-card" onclick="openCharacterModal('momonga')">
+                <div class="character-image-container">
+                    <div class="character-image" style="display: flex; align-items: center; justify-content: center; font-size: 80px;">🐿️</div>
+                </div>
+                <h3 class="character-name">莫莫咖</h3>
+                <p class="character-name-en">Momonga</p>
+                <p class="character-tagline">飞鼠·可爱活泼·喜欢飞行</p>
+            </div>
+            
+            <div class="character-card" onclick="openCharacterModal('rakkou')">
+                <div class="character-image-container">
+                    <div class="character-image" style="display: flex; align-items: center; justify-content: center; font-size: 80px;">🦦</div>
+                </div>
+                <h3 class="character-name">拉蔻</h3>
+                <p class="character-name-en">Rakkou</p>
+                <p class="character-tagline">海獭·温和友善·喜欢海鲜</p>
             </div>
         </div>
     </section>
@@ -523,12 +550,22 @@
             
             <div class="qa-item">
                 <div class="question">Chiikawa是什么？</div>
-                <div class="answer">Chiikawa是一只白色的小仓鼠，是这个故事的主角。他虽然爱哭，但在关键时刻非常勇敢坚强，运气很好。</div>
+                <div class="answer">Chiikawa（吉伊卡哇）是由日本漫画家NAGANO创作的漫画作品的主角，是一只小巧可爱的仓鼠。虽然有时候爱哭，但在重要时刻表现得非常勇敢和坚强。</div>
             </div>
             
             <div class="qa-item">
-                <div class="question">Chiikawa有哪些朋友？</div>
-                <div class="answer">最好的朋友是哈奇（Hachiware）和乌萨奇（Usagi）。他们一起冒险、一起工作、一起生活。</div>
+                <div class="question">主要角色有哪些？</div>
+                <div class="answer">主角团包括三位：吉伊卡哇（仓鼠）、小八（猫咪）、乌萨奇（兔子）。此外还有飞鼠莫莫咖、海獭拉蔻、栗子馒头、铠甲先生等配角。</div>
+            </div>
+            
+            <div class="qa-item">
+                <div class="question">Chiikawa住在哪里？</div>
+                <div class="answer">吉伊卡哇目前居住在一个通过抽奖获得的白色房子里。小八住在山洞里。乌萨奇的居住地至今是个谜。</div>
+            </div>
+            
+            <div class="qa-item">
+                <div class="question">角色的武器是什么？</div>
+                <div class="answer">吉伊卡哇使用粉色刺叉，小八使用蓝色刺叉，乌萨奇使用能发射火药的棍子。他们在奇幻世界里用这些武器保护自己和朋友。</div>
             </div>
             
             <div class="qa-item">
@@ -551,8 +588,28 @@
                 <img id="modalImage" src="" alt="" style="max-width: 300px; max-height: 300px; object-fit: contain;">
             </div>
             
-            <div style="text-align: center; color: #666; font-size: 1.2em; line-height: 2; margin-bottom: 40px;">
+            <div style="text-align: center; color: #666; font-size: 1.2em; line-height: 2; margin-bottom: 30px;">
                 <p id="modalDescription"></p>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%); border-radius: 20px; padding: 30px; margin-bottom: 40px;">
+                <h4 style="font-size: 1.3em; color: #ff9a9e; margin-bottom: 20px; text-align: center;">✨ 角色档案</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                    <div style="background: white; padding: 20px; border-radius: 15px; text-align: center;">
+                        <div style="font-size: 2em; margin-bottom: 10px;">🏠</div>
+                        <div style="color: #999; font-size: 0.9em; margin-bottom: 5px;">住所</div>
+                        <div id="modalHome" style="font-weight: bold; color: #333;"></div>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 15px; text-align: center;">
+                        <div style="font-size: 2em; margin-bottom: 10px;">⚔️</div>
+                        <div style="color: #999; font-size: 0.9em; margin-bottom: 5px;">武器</div>
+                        <div id="modalWeapon" style="font-weight: bold; color: #333;"></div>
+                    </div>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 15px;">
+                    <div style="color: #999; font-size: 0.9em; margin-bottom: 15px; text-align: center;">性格特点</div>
+                    <div id="modalPersonality" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;"></div>
+                </div>
             </div>
             
             <h3 style="font-size: 2em; color: #ff9a9e; text-align: center; margin-bottom: 30px;">📸 图片画廊</h3>
@@ -574,32 +631,28 @@
             chiikawa: {
                 name: '吉伊卡哇',
                 nameEn: 'Chiikawa',
-                description: '本作主角，一只白色的小仓鼠。虽然爱哭但在关键时刻非常勇敢坚强，运气很好，住在抽奖中的白色房子里。非常喜欢自己的好朋友哈奇和乌萨奇。台词基本上由简单的音节构成。',
+                description: '本作主角，一只小巧可爱的仓鼠。虽然有时候爱哭，但在重要时刻表现得非常勇敢和坚强。拥有很好的运气，目前居住在一个通过抽奖获得的白色房子里。使用粉色刺叉作为武器。非常喜欢自己的好朋友小八和乌萨奇。',
                 image: 'public/images/chiikawa/chiikawa.png',
+                weapon: '粉色刺叉',
+                home: '抽奖中的白色房子',
+                personality: ['爱哭', '勇敢', '坚强', '运气好'],
                 images: [
                     'public/images/chiikawa/chiikawa.png',
-                    'public/images/chiikawa/chiikawa.png',
-                    'public/images/chiikawa/chiikawa.png',
-                    'public/images/chiikawa/chiikawa.png',
-                    'public/images/chiikawa/chiikawa.png',
-                    'public/images/chiikawa/chiikawa.png',
-                    'public/images/chiikawa/chiikawa.png',
-                    'public/images/chiikawa/chiikawa.png',
-                    'public/images/chiikawa/chiikawa.png',
-                    'public/images/chiikawa/chiikawa.png'
+                    'public/images/chiikawa/usagi_1.gif',
+                    'public/images/chiikawa/usagi_2.gif',
+                    'public/images/chiikawa/usagi_3.gif',
+                    'public/images/chiikawa/usagi_4.gif'
                 ]
             },
             hachiware: {
-                name: '哈奇',
+                name: '小八',
                 nameEn: 'Hachiware',
-                description: '主角团之一，吉伊和乌萨奇的好朋友。主角团中唯一能完整使用人类语言说话的存在。好奇心旺盛的乐天派，偶尔会露出天然的一面，住在山洞里。是吉伊的现实嘴替。',
+                description: '一只猫咪，是故事中的关键角色之一。开朗热情，对朋友真诚，非常喜欢说话。充满好奇心，有时会显露出天然呆的一面。住在山洞里，使用蓝色的刺叉作为武器。特别的是，他演唱了动画的片尾曲。',
                 image: 'public/images/chiikawa/hachiware.png',
+                weapon: '蓝色刺叉',
+                home: '山洞',
+                personality: ['开朗', '热情', '爱说话', '天然呆'],
                 images: [
-                    'public/images/chiikawa/hachiware.png',
-                    'public/images/chiikawa/hachiware.png',
-                    'public/images/chiikawa/hachiware.png',
-                    'public/images/chiikawa/hachiware.png',
-                    'public/images/chiikawa/hachiware.png',
                     'public/images/chiikawa/hachiware.png',
                     'public/images/chiikawa/hachiware.png',
                     'public/images/chiikawa/hachiware.png',
@@ -610,20 +663,54 @@
             usagi: {
                 name: '乌萨奇',
                 nameEn: 'Usagi',
-                description: '主角团之一，吉伊和哈奇的好朋友。是一只黄色毛发的兔子，尾巴是白色大绒球。台词常为"呀哈""呜啦"等怪声。直觉敏锐，自由奔放又神秘的存在。住所至今是谜。',
+                description: '一只兔子，吉伊和小八的好朋友。自由奔放、神秘，且实力强大。经常发出"呀哈"、"乌拉"等奇特叫声。直觉敏锐，居住地不明。武器是一根两端能发射火药的棍子。',
                 image: 'public/images/chiikawa/usagi.png',
+                weapon: '能发射火药的棍子',
+                home: '不明',
+                personality: ['自由奔放', '神秘', '实力强大', '直觉敏锐'],
                 images: [
                     'public/images/chiikawa/usagi.png',
-                    'public/images/chiikawa/usagi.png',
-                    'public/images/chiikawa/usagi.png',
-                    'public/images/chiikawa/usagi.png',
-                    'public/images/chiikawa/usagi.png',
-                    'public/images/chiikawa/usagi.png',
-                    'public/images/chiikawa/usagi.png',
-                    'public/images/chiikawa/usagi.png',
-                    'public/images/chiikawa/usagi.png',
-                    'public/images/chiikawa/usagi.png'
+                    'public/images/chiikawa/usagi_1.gif',
+                    'public/images/chiikawa/usagi_2.gif',
+                    'public/images/chiikawa/usagi_3.gif',
+                    'public/images/chiikawa/usagi_4.gif'
                 ]
+            },
+            kurimanju: {
+                name: '栗子馒头',
+                nameEn: 'Kurimanju',
+                description: '一只棕色的小动物（原型是蜜獾）。看起来很可爱，但声音和行为像一位老成的大叔。每次出场都会像位美食家一样享受餐食，尤其爱喝酒。对主角团也关照有佳。',
+                image: 'public/images/chiikawa/kurimanju.png',
+                weapon: '无',
+                home: '未知',
+                personality: ['成熟稳重', '美食家', '爱喝酒', '和善'],
+                images: [
+                    'public/images/chiikawa/kurimanju.png',
+                    'public/images/chiikawa/kurimanju.png',
+                    'public/images/chiikawa/kurimanju.png',
+                    'public/images/chiikawa/kurimanju.png',
+                    'public/images/chiikawa/kurimanju.png'
+                ]
+            },
+            momonga: {
+                name: '莫莫咖',
+                nameEn: 'Momonga',
+                description: '一只可爱的飞鼠，是Chiikawa世界中的配角之一。性格活泼好动，喜欢在空中飞行。经常和主角团一起冒险，为故事增添了更多的乐趣和活力。',
+                image: null,
+                weapon: '无',
+                home: '森林',
+                personality: ['可爱', '活泼', '好动', '喜欢飞行'],
+                images: []
+            },
+            rakkou: {
+                name: '拉蔻',
+                nameEn: 'Rakkou',
+                description: '一只海獭，生活在Chiikawa世界的海洋中。性格温和友善，喜欢海鲜。经常出现在海边场景中，和其他角色互动时总是展现出温柔的一面。',
+                image: null,
+                weapon: '无',
+                home: '海洋',
+                personality: ['温和', '友善', '喜欢海鲜', '温柔'],
+                images: []
             }
         };
         
@@ -634,14 +721,32 @@
             document.getElementById('modalName').textContent = data.name;
             document.getElementById('modalNameEn').textContent = data.nameEn;
             document.getElementById('modalDescription').textContent = data.description;
-            document.getElementById('modalImage').src = data.image;
+            
+            if (data.image) {
+                document.getElementById('modalImage').src = data.image;
+                document.getElementById('modalImage').style.display = 'block';
+            } else {
+                document.getElementById('modalImage').style.display = 'none';
+            }
+            
+            document.getElementById('modalHome').textContent = data.home || '未知';
+            document.getElementById('modalWeapon').textContent = data.weapon || '无';
+            document.getElementById('modalPersonality').innerHTML = data.personality.map(p => 
+                `<span style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); color: white; padding: 8px 20px; border-radius: 20px; font-size: 0.9em;">${p}</span>`
+            ).join('');
             
             const galleryGrid = document.getElementById('galleryGrid');
-            galleryGrid.innerHTML = data.images.map((img, index) => `
-                <div class="gallery-item" onclick="openLightbox('${img}')">
-                    <img src="${img}" alt="${data.name} ${index + 1}" loading="lazy">
-                </div>
-            `).join('');
+            if (data.images && data.images.length > 0) {
+                galleryGrid.innerHTML = data.images.map((img, index) => `
+                    <div class="gallery-item" onclick="openLightbox('${img}')">
+                        <img src="${img}" alt="${data.name} ${index + 1}" loading="lazy">
+                    </div>
+                `).join('');
+                galleryGrid.style.display = 'grid';
+            } else {
+                galleryGrid.innerHTML = '<p style="text-align: center; color: #999; padding: 40px;">📸 图片更新中...</p>';
+                galleryGrid.style.display = 'block';
+            }
             
             document.getElementById('characterModal').classList.add('active');
             document.body.style.overflow = 'hidden';
