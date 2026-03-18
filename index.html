@@ -308,7 +308,7 @@
                 birthday: "2017年5月1日",
                 weapon: "粉色刺叉",
                 species: "仓鼠",
-                image: null
+                image: "public/images/chiikawa/chiikawa.png"
             },
             {
                 id: 2,
@@ -323,7 +323,7 @@
                 birthday: "2020年5月1日",
                 weapon: "蓝色刺叉",
                 species: "未知（像猫但不是猫）",
-                image: null
+                image: "public/images/chiikawa/hachiware.png"
             },
             {
                 id: 3,
@@ -338,7 +338,7 @@
                 birthday: "2019年1月22日",
                 weapon: "能发射火药的棍子",
                 species: "兔子",
-                image: null
+                image: "public/images/chiikawa/usagi.png"
             },
             {
                 id: 4,
@@ -353,7 +353,7 @@
                 birthday: "未知",
                 weapon: "无",
                 species: "蜜獾",
-                image: null
+                image: "public/images/chiikawa/kurimanju.png"
             }
         ];
         
@@ -361,6 +361,7 @@
             const grid = document.getElementById('characterGrid');
             grid.innerHTML = characters.map(char => `
                 <div class="character-card" onclick="openModal(${char.id})">
+                    ${char.image ? `<img src="${char.image}" alt="${char.name}" class="character-image">` : ''}
                     <div class="character-card-header">
                         <div class="character-avatar" style="background: ${char.color}">
                             ${char.emoji}
@@ -385,7 +386,16 @@
             document.getElementById('modalName').textContent = char.name;
             document.getElementById('modalEnglishName').textContent = char.nameEn;
             document.getElementById('modalDescription').textContent = char.description;
-            document.getElementById('modalImage').style.display = 'none';
+            
+            const modalImage = document.getElementById('modalImage');
+            if (char.image) {
+                modalImage.src = char.image;
+                modalImage.alt = char.name;
+                modalImage.style.display = 'block';
+            } else {
+                modalImage.style.display = 'none';
+            }
+            
             document.getElementById('modalPersonality').innerHTML = char.personality.map(tag => `<span class="tag">${tag}</span>`).join('');
             document.getElementById('modalSpecies').textContent = char.species;
             document.getElementById('modalBirthday').textContent = char.birthday;
