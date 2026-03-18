@@ -322,31 +322,52 @@
         /* 角色图片画廊 */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
             margin-top: 40px;
         }
-        
+
         .gallery-item {
             background: white;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 154, 158, 0.12);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
             aspect-ratio: 1;
+            position: relative;
         }
-        
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 154, 158, 0) 0%, rgba(254, 207, 239, 0) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 20px;
+            z-index: 1;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
         .gallery-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-10px) scale(1.08);
+            box-shadow: 0 20px 50px rgba(255, 154, 158, 0.25);
         }
-        
+
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            padding: 20px;
+            padding: 25px;
+            position: relative;
+            z-index: 0;
         }
         
         /* 大图浏览 */
@@ -516,24 +537,6 @@
                 <p class="character-name-en">Kurimanju</p>
                 <p class="character-tagline">蜜獾·成熟稳重·爱喝酒</p>
             </div>
-            
-            <div class="character-card" onclick="openCharacterModal('momonga')">
-                <div class="character-image-container">
-                    <div class="character-image" style="display: flex; align-items: center; justify-content: center; font-size: 80px;">🐿️</div>
-                </div>
-                <h3 class="character-name">莫莫咖</h3>
-                <p class="character-name-en">Momonga</p>
-                <p class="character-tagline">飞鼠·可爱活泼·喜欢飞行</p>
-            </div>
-            
-            <div class="character-card" onclick="openCharacterModal('rakkou')">
-                <div class="character-image-container">
-                    <div class="character-image" style="display: flex; align-items: center; justify-content: center; font-size: 80px;">🦦</div>
-                </div>
-                <h3 class="character-name">拉蔻</h3>
-                <p class="character-name-en">Rakkou</p>
-                <p class="character-tagline">海獭·温和友善·喜欢海鲜</p>
-            </div>
         </div>
     </section>
     
@@ -638,10 +641,11 @@
                 personality: ['爱哭', '勇敢', '坚强', '运气好'],
                 images: [
                     'public/images/chiikawa/chiikawa.png',
-                    'public/images/chiikawa/usagi_1.gif',
-                    'public/images/chiikawa/usagi_2.gif',
-                    'public/images/chiikawa/usagi_3.gif',
-                    'public/images/chiikawa/usagi_4.gif'
+                    'public/images/chiikawa/chiikawa/B8SZ3aL3flw1J2N.thumb.1000_0.gif',
+                    'public/images/chiikawa/chiikawa/eASqY04YFMlpe14.thumb.1000_0.gif',
+                    'public/images/chiikawa/chiikawa/M6S9pNPpsBaxdWQ.thumb.1000_0.gif',
+                    'public/images/chiikawa/chiikawa/oVSPGLpGtg42ome.thumb.1000_0.gif',
+                    'public/images/chiikawa/chiikawa/V2S5N4oNUmYayQe.thumb.1000_0.gif'
                 ]
             },
             hachiware: {
@@ -654,10 +658,11 @@
                 personality: ['开朗', '热情', '爱说话', '天然呆'],
                 images: [
                     'public/images/chiikawa/hachiware.png',
-                    'public/images/chiikawa/hachiware.png',
-                    'public/images/chiikawa/hachiware.png',
-                    'public/images/chiikawa/hachiware.png',
-                    'public/images/chiikawa/hachiware.png'
+                    'public/images/chiikawa/hachiware/8gSZ9Xe9fgo06Za.thumb.1000_0.gif',
+                    'public/images/chiikawa/hachiware/AvS6gALgCw6eaJm.thumb.1000_0.gif',
+                    'public/images/chiikawa/hachiware/eASqY04YFMlaZZw.thumb.1000_0.gif',
+                    'public/images/chiikawa/hachiware/LySy0V30FqJQgAx.thumb.1000_0.gif',
+                    'public/images/chiikawa/hachiware/V2S5N4oNUmYVg6l.thumb.1000_0.gif'
                 ]
             },
             usagi: {
@@ -670,10 +675,14 @@
                 personality: ['自由奔放', '神秘', '实力强大', '直觉敏锐'],
                 images: [
                     'public/images/chiikawa/usagi.png',
-                    'public/images/chiikawa/usagi_1.gif',
-                    'public/images/chiikawa/usagi_2.gif',
-                    'public/images/chiikawa/usagi_3.gif',
-                    'public/images/chiikawa/usagi_4.gif'
+                    'public/images/chiikawa/usagi/1.gif',
+                    'public/images/chiikawa/usagi/AvS6gALgCw6Alg7.thumb.1000_0.gif',
+                    'public/images/chiikawa/usagi/JOS5JA3JUWaqD6V.thumb.1000_0.jpg',
+                    'public/images/chiikawa/usagi/lGSMb6Dbux2loG1.thumb.1000_0.gif',
+                    'public/images/chiikawa/usagi/N5S26Yo6uPZey6x.thumb.1000_0.gif',
+                    'public/images/chiikawa/usagi/n6S72vP2s90LEQZ.thumb.1000_0.gif',
+                    'public/images/chiikawa/usagi/P5SP38x3tbjJGop.thumb.1000_0.gif',
+                    'public/images/chiikawa/usagi/z2SZm59mfxOMmWV.thumb.1000_0.gif'
                 ]
             },
             kurimanju: {
@@ -686,31 +695,12 @@
                 personality: ['成熟稳重', '美食家', '爱喝酒', '和善'],
                 images: [
                     'public/images/chiikawa/kurimanju.png',
-                    'public/images/chiikawa/kurimanju.png',
-                    'public/images/chiikawa/kurimanju.png',
-                    'public/images/chiikawa/kurimanju.png',
-                    'public/images/chiikawa/kurimanju.png'
+                    'public/images/chiikawa/kurimanju/5zSdjAZjhO5jbo8.thumb.1000_0.jpg',
+                    'public/images/chiikawa/kurimanju/9WSeVAXVu8pNxXQ.thumb.1000_0.jpg',
+                    'public/images/chiikawa/kurimanju/GgSYMOa5fdXQzm0.thumb.1000_0.png',
+                    'public/images/chiikawa/kurimanju/P5SP7bAWFb9all1.thumb.1000_0.png',
+                    'public/images/chiikawa/kurimanju/vDSA0Y90tdNGzON.thumb.1000_0.gif'
                 ]
-            },
-            momonga: {
-                name: '莫莫咖',
-                nameEn: 'Momonga',
-                description: '一只可爱的飞鼠，是Chiikawa世界中的配角之一。性格活泼好动，喜欢在空中飞行。经常和主角团一起冒险，为故事增添了更多的乐趣和活力。',
-                image: null,
-                weapon: '无',
-                home: '森林',
-                personality: ['可爱', '活泼', '好动', '喜欢飞行'],
-                images: []
-            },
-            rakkou: {
-                name: '拉蔻',
-                nameEn: 'Rakkou',
-                description: '一只海獭，生活在Chiikawa世界的海洋中。性格温和友善，喜欢海鲜。经常出现在海边场景中，和其他角色互动时总是展现出温柔的一面。',
-                image: null,
-                weapon: '无',
-                home: '海洋',
-                personality: ['温和', '友善', '喜欢海鲜', '温柔'],
-                images: []
             }
         };
         
